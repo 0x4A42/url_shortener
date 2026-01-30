@@ -1,33 +1,28 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using Moq;
 using UrlShortener.Data;
 using UrlShortener.Model;
 using UrlShortener.Url.Endpoints;
 
-namespace UrlShortenerTests.UrlTests;
+namespace UrlShortenerTests.UrlTests.EndpointTests;
 
 public class ShortenTests
 {
-    private IConfiguration GetConfiguration()
-    {
-        var inMemorySettings = new Dictionary<string, string>
-        {
-            {"MongoConnectionString", "mongodb://localhost:27017"}
-        };
-        return new ConfigurationBuilder()
-            .AddInMemoryCollection(inMemorySettings!)
-            .Build();
-    }
-
     [Fact]
-    public void PassingAValidUrlShouldReturnAValidShortenedUrl()
+    public void Handle_ReturnsSuccess_ForValidUrlThatWasNotShortenedBefore()
     {
         // Arrange
+        var mockMongoCollection = new Mock<IMongoCollection<BsonDocument>>();
+        var mockUrlCollection = new Mock<UrlCollection>(mockMongoCollection.Object);
+        mockUrlCollection.Setup(x => x.HasUrlBeenPreviouslyShortened(It.IsAny<string>())).Returns(false);
+        var sut = new Shorten();
+        
         var request = new ShortenRequest { Url = "http://google.com", Length = 5 };
-        var collection = new UrlCollection(GetConfiguration());
 
         // Act
-        var result = Shorten.Handle(request, collection, CancellationToken.None);
+        var result = sut.Handle(request, mockUrlCollection.Object, CancellationToken.None);
 
         // Assert
         var response = Assert.IsType<Ok<ShortenResponse>>(result);
@@ -37,14 +32,16 @@ public class ShortenTests
     }
 
     [Fact]
-    public void PassingAnInvalidUrlShouldReturnA400Response()
+    public void Handle_Returns400Response_ForInvalidUrlFormat()
     {
         // Arrange
+        var mockMongoCollection = new Mock<IMongoCollection<BsonDocument>>();
+        var mockUrlCollection = new Mock<UrlCollection>(mockMongoCollection.Object);
+        var sut = new Shorten();
         var request = new ShortenRequest { Url = "not-a-valid-url", Length = 5 };
-        var collection = new UrlCollection(GetConfiguration());
-
+        
         // Act
-        var result = Shorten.Handle(request, collection, CancellationToken.None);
+        var result = sut.Handle(request, mockUrlCollection.Object, CancellationToken.None);
 
         // Assert
         var response = Assert.IsType<BadRequest<ShortenResponse>>(result);
@@ -56,15 +53,20 @@ public class ShortenTests
     public void PassingTheSameUrlTwiceShouldReturnTheSameShortenedUrl()
     {
         // Arrange
+        var mockMongoCollection = new Mock<IMongoCollection<BsonDocument>>();
+        var mockUrlCollection = new Mock<UrlCollection>(mockMongoCollection.Object);
+        var sut = new Shorten();
+        
         var request = new ShortenRequest { Url = "http://google.com", Length = 5 };
-        var collection = new UrlCollection(GetConfiguration());
-
-        var initialResult = Shorten.Handle(request, collection, CancellationToken.None);
+        var initialResult = sut.Handle(request, mockUrlCollection.Object, CancellationToken.None);
         var initialResponse = Assert.IsType<Ok<ShortenResponse>>(initialResult);
         Assert.NotNull(initialResponse.Value);
         
+        mockUrlCollection.Setup(x => x.HasUrlBeenPreviouslyShortened(It.IsAny<string>())).Returns(true);
+        mockUrlCollection.Setup(x => x.GetShortenedUrl(It.IsAny<string>())).Returns(initialResponse.Value.ShortenedUrl);
+        
         // Act
-        var secondResult = Shorten.Handle(request, collection, CancellationToken.None);
+        var secondResult = sut.Handle(request, mockUrlCollection.Object, CancellationToken.None);
         var secondResponse = Assert.IsType<Ok<ShortenResponse>>(secondResult);
         
         // Assert
