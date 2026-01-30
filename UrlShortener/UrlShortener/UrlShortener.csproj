@@ -19,7 +19,8 @@
 
     <ItemGroup>
       <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
+        <Link>Docker\.dockerignore</Link>
+        <DependentUpon>docker-compose.yaml</DependentUpon>
       </Content>
     </ItemGroup>
 

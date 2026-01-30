@@ -1,0 +1,17 @@
+name: url-shortener
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: url-shortener-mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: local
+    volumes:
+      - mongodb_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
