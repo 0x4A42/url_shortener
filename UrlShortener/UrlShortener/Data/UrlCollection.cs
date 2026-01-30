@@ -41,11 +41,10 @@ public class UrlCollection
     
     public void IncrementTelemetryForUrl(string shortenedUrl)
     {
-        var accessCount = _collection.Find(x => x["shortenedUrl"] == shortenedUrl).First()["numberOfRedirects"].AsInt32;
         var filter = Builders<BsonDocument>.Filter.Eq("shortenedUrl", shortenedUrl);
         var update = Builders<BsonDocument>.Update
-            .Inc("numberOfRedirects", accessCount + 1)
-            .Inc("lastAccessedUTC", DateTime.UtcNow);
+            .Inc("numberOfRedirects", 1)
+            .Set("lastAccessedUTC", DateTime.UtcNow);
         
         _collection.UpdateOne(filter, update);
     }
