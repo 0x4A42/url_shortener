@@ -1,6 +1,6 @@
-﻿namespace UrlShortenerTests.ModelTests;
+﻿using UrlShortener.Model;
 
-using UrlShortener.Model;
+namespace UrlShortenerTests.ModelTests;
 
 public class ShortenResponseTests
 {
