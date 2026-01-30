@@ -7,7 +7,7 @@ public class ShortenResponseTests
     [Fact]
     public void PropertiesRetainStateWhenSet()
     {
-        const string originalUrl = "http://google.com";
+        const string originalUrl = "https://google.com";
         const string shortenedUrl = "abc123";
         const string detail = "Success.";
         

@@ -18,7 +18,7 @@ public class ShortenRequestTests
     [Fact]
     public void PropertiesRetainStateWhenSet()
     {
-        const string url = "http://google.com";
+        const string url = "https://google.com";
         const int length = 4;
         
         var sut = new ShortenRequest()

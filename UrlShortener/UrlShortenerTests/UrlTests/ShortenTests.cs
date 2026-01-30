@@ -24,10 +24,10 @@ public class ShortenTests
     {
         // Arrange
         var request = new ShortenRequest { Url = "http://google.com", Length = 5 };
-        var sut = new UrlRepository(GetConfiguration());
+        var collection = new UrlCollection(GetConfiguration());
 
         // Act
-        var result = Shorten.Handle(request, sut, CancellationToken.None);
+        var result = Shorten.Handle(request, collection, CancellationToken.None);
 
         // Assert
         var response = Assert.IsType<Ok<ShortenResponse>>(result);
@@ -41,10 +41,10 @@ public class ShortenTests
     {
         // Arrange
         var request = new ShortenRequest { Url = "not-a-valid-url", Length = 5 };
-        var sut = new UrlRepository(GetConfiguration());
+        var collection = new UrlCollection(GetConfiguration());
 
         // Act
-        var result = Shorten.Handle(request, sut, CancellationToken.None);
+        var result = Shorten.Handle(request, collection, CancellationToken.None);
 
         // Assert
         var response = Assert.IsType<BadRequest<ShortenResponse>>(result);
@@ -57,14 +57,14 @@ public class ShortenTests
     {
         // Arrange
         var request = new ShortenRequest { Url = "http://google.com", Length = 5 };
-        var sut = new UrlRepository(GetConfiguration());
+        var collection = new UrlCollection(GetConfiguration());
 
-        var initialResult = Shorten.Handle(request, sut, CancellationToken.None);
+        var initialResult = Shorten.Handle(request, collection, CancellationToken.None);
         var initialResponse = Assert.IsType<Ok<ShortenResponse>>(initialResult);
         Assert.NotNull(initialResponse.Value);
         
         // Act
-        var secondResult = Shorten.Handle(request, sut, CancellationToken.None);
+        var secondResult = Shorten.Handle(request, collection, CancellationToken.None);
         var secondResponse = Assert.IsType<Ok<ShortenResponse>>(secondResult);
         
         // Assert

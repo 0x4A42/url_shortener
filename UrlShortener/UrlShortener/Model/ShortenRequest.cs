@@ -2,6 +2,6 @@
 
 public class ShortenRequest
 {
-    public required string Url { get; set; }
-    public int Length { get; set; } = 7;  // default to 7 if nothing is provided
+    public required string Url { get; init; }
+    public int Length { get; init; } = 7;  // default to 7 if nothing is provided
 }
