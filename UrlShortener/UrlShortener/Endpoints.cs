@@ -16,7 +16,9 @@ public static class Endpoints
     {
         var endpoints = app.MapGroup("/url")
             .WithTags("Urls");
-        
+
+        endpoints.MapPublicGroup()
+            .MapEndpoint<Shorten>();
     }
     
     private static RouteGroupBuilder MapPublicGroup(this IEndpointRouteBuilder app, string? prefix = null)

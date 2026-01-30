@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DACAADB8-B96E-4E6B-B6E3-9228ECA86C47}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener", "UrlShortener\UrlShortener.csproj", "{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortenerTests", "UrlShortenerTests\UrlShortenerTests.csproj", "{71D5701B-7521-49B2-BB16-34A0F72D80BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
