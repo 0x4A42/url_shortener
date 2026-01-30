@@ -7,10 +7,14 @@ namespace UrlShortener.Url.Endpoints;
 public class Redirect: IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app) => app
-        .MapGet("{shortenedUrl}", Handle)
+        .MapGet("{shortenedUrl}",
+            ([FromRoute] string shortenedUrl,
+            [FromServices] UrlCollection collection,
+            [FromServices] Redirect redirect,
+            CancellationToken cancellationToken) => redirect.Handle(shortenedUrl, collection, cancellationToken))
         .WithSummary("Use your shortened URL to be redirected to the original URL!");
     
-    internal static IResult? Handle([FromRoute] string shortenedUrl,
+    internal  IResult? Handle([FromRoute] string shortenedUrl,
         [FromServices] UrlCollection collection,
         CancellationToken cancellationToken)
     {

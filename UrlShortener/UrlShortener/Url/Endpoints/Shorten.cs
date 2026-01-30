@@ -6,12 +6,15 @@ namespace UrlShortener.Url.Endpoints;
 
 public class Shorten : IEndpoint
 {
-    
     public static void Map(IEndpointRouteBuilder app) => app
-        .MapPost("", Handle)
+        .MapPost("",
+            ([FromBody] ShortenRequest request,
+            [FromServices] UrlCollection collection,
+            [FromServices] Shorten shorten,
+            CancellationToken cancellationToken) => shorten.Handle(request, collection, cancellationToken))
         .WithSummary("Provide a URL and length in the request body to shorten it!");
-    
-    internal static IResult Handle([FromBody] ShortenRequest request,
+
+    internal IResult Handle([FromBody] ShortenRequest request,
         [FromServices] UrlCollection collection,
         CancellationToken cancellationToken)
     {
@@ -40,7 +43,7 @@ public class Shorten : IEndpoint
     private static bool CheckUrlIsValid(string url) 
         => Uri.IsWellFormedUriString(url, UriKind.Absolute);
     
-    private static ShortenResponse ShortenUrl(ShortenRequest request)
+    private ShortenResponse ShortenUrl(ShortenRequest request)
     {
         return new ShortenResponse
         {
