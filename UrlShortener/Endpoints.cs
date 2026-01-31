@@ -13,18 +13,30 @@ public static class Endpoints
     
     private static void MapUrlEndpoints(this IEndpointRouteBuilder app)
     {
-        var endpoints = app.MapGroup("/url")
+        var urlEndpoints = app.MapGroup("/url")
             .WithTags("Urls");
 
-        endpoints.MapPublicGroup()
+        urlEndpoints.MapPublicGroup()
             .MapEndpoint<Shorten>()
             .MapEndpoint<Redirect>();
+        
+        var systemEndpoints = app.MapGroup("")
+            .WithTags("Sys");
+        
+        systemEndpoints.MapAuthorizedGroup()
+            .MapEndpoint<Purge>();
     }
     
     private static RouteGroupBuilder MapPublicGroup(this IEndpointRouteBuilder app, string? prefix = null)
     {
         return app.MapGroup(prefix ?? string.Empty)
             .AllowAnonymous();
+    }
+    
+    private static RouteGroupBuilder MapAuthorizedGroup(this IEndpointRouteBuilder app, string? prefix = null)
+    {
+        return app.MapGroup(prefix ?? string.Empty)
+            .RequireAuthorization();
     }
     
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app) where TEndpoint : IEndpoint

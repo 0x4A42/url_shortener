@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using UrlShortener.Model;
+using UrlShortener.Model.Response;
 
 namespace UrlShortener.Data;
 
@@ -37,5 +37,14 @@ public class UrlCollection(IMongoCollection<BsonDocument> collection)
             .Set("lastAccessedUTC", DateTime.UtcNow);
         
         collection.UpdateOne(filter, update);
+    }
+
+    public virtual int PurgeStaleUrls(int numberOfDays)
+    {
+            var purgeDate = DateTime.UtcNow.Subtract(TimeSpan.FromDays(numberOfDays));
+            var filter = Builders<BsonDocument>.Filter.Lt("lastAccessedUTC", purgeDate);
+            var result = collection.DeleteMany(filter);
+
+            return (int)result.DeletedCount;
     }
 }

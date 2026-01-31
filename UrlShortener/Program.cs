@@ -17,8 +17,12 @@ public class Program
         AddServices(builder);
 
         builder.Services.AddAuthorization();
-        
+        builder.Services.AddAuthentication("ApiKey")
+            .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>("ApiKey", null);
+
         var app = builder.Build();
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.MapEndpoints();
         app.Run();
     }
