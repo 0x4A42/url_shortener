@@ -1,4 +1,4 @@
-﻿namespace UrlShortener.Url.Endpoints;
+﻿namespace UrlShortener.Url;
 
 public interface IEndpoint
 {

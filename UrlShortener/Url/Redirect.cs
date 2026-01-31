@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Data;
-using UrlShortener.Model;
+using UrlShortener.Model.Response;
 
-namespace UrlShortener.Url.Endpoints;
+namespace UrlShortener.Url;
 
-public class Redirect: IEndpoint
+public class Redirect(ILogger<Redirect> logger): IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app) => app
         .MapGet("{shortenedUrl}",
@@ -14,19 +14,28 @@ public class Redirect: IEndpoint
             CancellationToken cancellationToken) => redirect.Handle(shortenedUrl, collection, cancellationToken))
         .WithSummary("Use your shortened URL to be redirected to the original URL!");
     
-    internal  IResult? Handle([FromRoute] string shortenedUrl,
+    internal IResult Handle([FromRoute] string shortenedUrl,
         [FromServices] UrlCollection collection,
         CancellationToken cancellationToken)
     {
-        var originalUrlResult = collection.GetOriginalUrl(shortenedUrl);
-        
-        var urlVerification = VerifyUrl(originalUrlResult);
-        if (urlVerification is not null)
+        var originalUrlResult = "";
+        try
         {
-            return urlVerification;
-        }
+            originalUrlResult = collection.GetOriginalUrl(shortenedUrl);
 
-        collection.IncrementTelemetryForUrl(shortenedUrl);
+            var urlVerification = VerifyUrl(originalUrlResult);
+            if (urlVerification is not null)
+            {
+                return urlVerification;
+            }
+
+            collection.IncrementTelemetryForUrl(shortenedUrl);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error experienced during execution of Redirect endpoint");
+        }
+        
         return Results.Redirect(originalUrlResult);
     }
 

@@ -1,4 +1,4 @@
-﻿using UrlShortener.Url.Endpoints;
+﻿using UrlShortener.Url;
 
 namespace UrlShortener;
 
