@@ -22,7 +22,7 @@ public class PurgeTests
         mockUrlCollection.Setup(x => x.PurgeStaleUrls(It.IsAny<int>())).Returns(5);
         var sut = new Purge(mockLogger.Object);
         
-        var request = new PurgeRequest() { PurgeCutoffDays = 7 };
+        var request = new PurgeRequest { RemoveAfterDays = 7 };
 
         // Act
         var result = sut.Handle(request, mockUrlCollection.Object, CancellationToken.None);
@@ -43,7 +43,7 @@ public class PurgeTests
         mockUrlCollection.Setup(x => x.PurgeStaleUrls(It.IsAny<int>())).Returns(0);
         var sut = new Purge(mockLogger.Object);
         
-        var request = new PurgeRequest() { PurgeCutoffDays = 7 };
+        var request = new PurgeRequest { RemoveAfterDays = 7 };
 
         // Act
         var result = sut.Handle(request, mockUrlCollection.Object, CancellationToken.None);

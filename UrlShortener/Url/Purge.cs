@@ -8,7 +8,7 @@ namespace UrlShortener.Url;
 public class Purge(ILogger<Purge> logger): IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app) => app
-        .MapGet("/purge", (
+        .MapPost("/purge", (
             [FromBody] PurgeRequest request,
             [FromServices] UrlCollection collection,
             [FromServices] Purge purge,
@@ -23,7 +23,7 @@ public class Purge(ILogger<Purge> logger): IEndpoint
         var numberOfPurgedUrls = 0;
         try
         {
-            numberOfPurgedUrls = collection.PurgeStaleUrls(request.PurgeCutoffDays);
+            numberOfPurgedUrls = collection.PurgeStaleUrls(request.RemoveAfterDays);
         }
         catch (Exception ex)
         {
