@@ -6,17 +6,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener", "UrlShortener\UrlShortener.csproj", "{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.UnitTests", "UrlShortener.UnitTests\UrlShortener.UnitTests.csproj", "{71D5701B-7521-49B2-BB16-34A0F72D80BE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{37BF5A7B-1CD9-46BA-B5D3-3C64E7DF4E49}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{91D0C219-7F8A-49E4-A61D-5E9DBE3251E2}"
-	ProjectSection(SolutionItems) = preProject
-		postman\URL Shortener.postman_collection.json = postman\URL Shortener.postman_collection.json
-		postman\Url Shortener - Local.postman_environment.json = postman\Url Shortener - Local.postman_environment.json
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener", "src\UrlShortener.csproj", "{2B995A93-8751-442F-8DEE-FA31583F9830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.UnitTests", "tests\UrlShortener.UnitTests\UrlShortener.UnitTests.csproj", "{1E55F306-655A-41AE-B0DD-61D364BA2489}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,16 +18,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B995A93-8751-442F-8DEE-FA31583F9830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B995A93-8751-442F-8DEE-FA31583F9830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B995A93-8751-442F-8DEE-FA31583F9830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B995A93-8751-442F-8DEE-FA31583F9830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E55F306-655A-41AE-B0DD-61D364BA2489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E55F306-655A-41AE-B0DD-61D364BA2489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E55F306-655A-41AE-B0DD-61D364BA2489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E55F306-655A-41AE-B0DD-61D364BA2489}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{71D5701B-7521-49B2-BB16-34A0F72D80BE} = {37BF5A7B-1CD9-46BA-B5D3-3C64E7DF4E49}
+		{1E55F306-655A-41AE-B0DD-61D364BA2489} = {37BF5A7B-1CD9-46BA-B5D3-3C64E7DF4E49}
 	EndGlobalSection
 EndGlobal

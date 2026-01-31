@@ -8,7 +8,7 @@ using UrlShortener.Model;
 using UrlShortener.Model.Request;
 using UrlShortener.Url;
 
-namespace UrlShortenerTests.UrlTests.EndpointTests;
+namespace UrlShortenerTests.UrlTests;
 
 public class PurgeTests
 {

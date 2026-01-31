@@ -8,7 +8,7 @@ using UrlShortener.Model.Request;
 using UrlShortener.Model.Response;
 using UrlShortener.Url;
 
-namespace UrlShortenerTests.UrlTests.EndpointTests;
+namespace UrlShortenerTests;
 
 public class ShortenTests
 {

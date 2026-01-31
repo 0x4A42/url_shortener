@@ -7,7 +7,7 @@ using UrlShortener.Data;
 using UrlShortener.Model.Response;
 using UrlShortener.Url;
 
-namespace UrlShortenerTests.UrlTests.EndpointTests;
+namespace UrlShortenerTests.UrlTests;
 
 public class RedirectTests
 {
