@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Moq;
 using UrlShortener.Data;
-using UrlShortener.Model;
-using UrlShortener.Url.Endpoints;
+using UrlShortener.Model.Request;
+using UrlShortener.Model.Response;
+using UrlShortener.Url;
 
 namespace UrlShortenerTests.UrlTests.EndpointTests;
 
@@ -16,8 +18,9 @@ public class ShortenTests
         // Arrange
         var mockMongoCollection = new Mock<IMongoCollection<BsonDocument>>();
         var mockUrlCollection = new Mock<UrlCollection>(mockMongoCollection.Object);
+        var mockLogger = new Mock<ILogger<Shorten>>();
         mockUrlCollection.Setup(x => x.HasUrlBeenPreviouslyShortened(It.IsAny<string>())).Returns(false);
-        var sut = new Shorten();
+        var sut = new Shorten(mockLogger.Object);
         
         var request = new ShortenRequest { Url = "http://google.com", Length = 5 };
 
@@ -37,7 +40,8 @@ public class ShortenTests
         // Arrange
         var mockMongoCollection = new Mock<IMongoCollection<BsonDocument>>();
         var mockUrlCollection = new Mock<UrlCollection>(mockMongoCollection.Object);
-        var sut = new Shorten();
+        var mockLogger = new Mock<ILogger<Shorten>>();
+        var sut = new Shorten(mockLogger.Object);
         var request = new ShortenRequest { Url = "not-a-valid-url", Length = 5 };
         
         // Act
@@ -55,7 +59,8 @@ public class ShortenTests
         // Arrange
         var mockMongoCollection = new Mock<IMongoCollection<BsonDocument>>();
         var mockUrlCollection = new Mock<UrlCollection>(mockMongoCollection.Object);
-        var sut = new Shorten();
+        var mockLogger = new Mock<ILogger<Shorten>>();
+        var sut = new Shorten(mockLogger.Object);
         
         var request = new ShortenRequest { Url = "http://google.com", Length = 5 };
         var initialResult = sut.Handle(request, mockUrlCollection.Object, CancellationToken.None);

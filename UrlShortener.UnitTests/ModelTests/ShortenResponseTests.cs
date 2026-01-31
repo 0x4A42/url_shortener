@@ -1,4 +1,4 @@
-﻿using UrlShortener.Model;
+﻿using UrlShortener.Model.Response;
 
 namespace UrlShortenerTests.ModelTests;
 

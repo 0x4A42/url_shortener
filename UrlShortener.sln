@@ -8,7 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener", "UrlShortener\UrlShortener.csproj", "{222B729B-7BFE-4C9F-9FC4-D0FEF067A3A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortenerTests", "UrlShortenerTests\UrlShortenerTests.csproj", "{71D5701B-7521-49B2-BB16-34A0F72D80BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.UnitTests", "UrlShortener.UnitTests\UrlShortener.UnitTests.csproj", "{71D5701B-7521-49B2-BB16-34A0F72D80BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{37BF5A7B-1CD9-46BA-B5D3-3C64E7DF4E49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +26,8 @@ Global
 		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71D5701B-7521-49B2-BB16-34A0F72D80BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{71D5701B-7521-49B2-BB16-34A0F72D80BE} = {37BF5A7B-1CD9-46BA-B5D3-3C64E7DF4E49}
 	EndGlobalSection
 EndGlobal
