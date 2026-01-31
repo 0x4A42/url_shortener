@@ -1,21 +1,35 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
-using UrlShortener;
 using UrlShortener.Data;
+using UrlShortener.Url.Endpoints;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace UrlShortener;
 
-// Register MongoDB collection
-builder.Services.AddScoped<IMongoCollection<BsonDocument>>(sp =>
+public class Program
 {
-    var configuration = sp.GetRequiredService<IConfiguration>();
-    var connectionString = configuration["MongoConnectionString"];
-    var client = new MongoClient(connectionString);
-    var database = client.GetDatabase("local");
-    return database.GetCollection<BsonDocument>("urls");
-});
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+        AddServices(builder);
+        
+        var app = builder.Build();
+        app.MapEndpoints();
+        app.Run();
+    }
 
-builder.Services.AddScoped<UrlCollection>();
-var app = builder.Build();
-app.MapEndpoints();
-app.Run();
+    private static void AddServices(WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<IMongoCollection<BsonDocument>>(sp =>
+        {
+            var configuration = sp.GetRequiredService<IConfiguration>();
+            var connectionString = configuration["MongoConnectionString"];
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase("local");
+            return database.GetCollection<BsonDocument>("urls");
+        });
+
+        builder.Services.AddScoped<UrlCollection>();
+        builder.Services.AddScoped<Redirect>();
+        builder.Services.AddScoped<Shorten>();
+    }
+}
