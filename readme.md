@@ -9,13 +9,13 @@ This repository is to host a url shortener I created for the purposes of wanting
 
 ## Getting Started
 * Clone the repository however you like.
-* Navigate to `UrlShortener\Docker` and run `docker compose up -d`
+* Navigate to `docker/` and run `docker compose up -d`
 * Run the `UrlShortener` project.
-* Hit the API with some requests (samples below).
+* Hit the API with some requests (samples below or in the `Postman` collection).
 
 ## Sample API Requests
 
-A `postman` collection and environment can be found at `postman/`. You can import these and select the `UrlShortener` environment, updating any variables as needed, for testing purposes.
+A `Postman` collection and environment can be found at `postman/`. You can import these and select the `UrlShortener` environment, updating any variables as needed, for testing purposes.
 
 The base URL has been `http://localhost:5002/` during development. Your IDE may change this, so double check if you're running into issues or have a port conflict.
 
