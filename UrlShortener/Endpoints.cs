@@ -13,11 +13,16 @@ public static class Endpoints
     
     private static void MapUrlEndpoints(this IEndpointRouteBuilder app)
     {
-        var urlEndpoints = app.MapGroup("/url")
-            .WithTags("Urls");
 
-        urlEndpoints.MapPublicGroup()
-            .MapEndpoint<Shorten>()
+        var shortenEndpoints = app.MapGroup("")
+            .WithTags("Shorten");
+        shortenEndpoints.MapPublicGroup()
+            .MapEndpoint<Shorten>();
+            
+        var redirectEndpoints = app.MapGroup("/url")
+            .WithTags("Redirect");
+
+        redirectEndpoints.MapPublicGroup()
             .MapEndpoint<Redirect>();
         
         var systemEndpoints = app.MapGroup("")
