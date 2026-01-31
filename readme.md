@@ -38,8 +38,24 @@ Sample Response
 
 Simply enter the URL with the `shortenedUrl` from the previous step in your browser and you will be magically redirected to the URL you shortened.
 
+### Purge stale URLs - `/purge (DELETE)`
+
+This is an authenticated endpoint, so you'll need to grab the value of `ApiKey` from the `appsettings.json` file and add it as the value to an `x-api-key` header.
+
+Sample Request
+```
+{
+  "RemoveAfterDays": 1
+}
+```
+
+Sample Response
+
+```
+{
+  "detail": "3 URL(s) successfully purged."
+}
+```
 
 ## TODO/Future Improvements
-* Add an auto-purge for URLs that have not been accessed in a while
 * Maybe add some Api collections for ease of use/testing
-* Add a functional test project

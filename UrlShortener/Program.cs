@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using Serilog;
 using UrlShortener.Authentication;
 using UrlShortener.Data;
+using UrlShortener.Services;
 using UrlShortener.Url;
 
 namespace UrlShortener;
@@ -52,6 +53,8 @@ public class Program
             var client = sp.GetRequiredService<IMongoClient>();
             return client.GetDatabase("local").GetCollection<BsonDocument>("urls");
         });
+        
+        builder.Services.AddHostedService<PurgeBackgroundService>();
         
         builder.Services.AddScoped<UrlCollection>();
         builder.Services.AddScoped<Redirect>();
