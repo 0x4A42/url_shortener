@@ -19,15 +19,16 @@ public class Program
 
     private static void AddServices(WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<IMongoCollection<BsonDocument>>(sp =>
-        {
-            var configuration = sp.GetRequiredService<IConfiguration>();
-            var connectionString = configuration["MongoConnectionString"];
-            var client = new MongoClient(connectionString);
-            var database = client.GetDatabase("local");
-            return database.GetCollection<BsonDocument>("urls");
+        builder.Services.AddSingleton<IMongoClient>(sp => {
+            var connectionString = sp.GetRequiredService<IConfiguration>()["MongoConnectionString"];
+            return new MongoClient(connectionString);
         });
 
+        builder.Services.AddScoped<IMongoCollection<BsonDocument>>(sp => {
+            var client = sp.GetRequiredService<IMongoClient>();
+            return client.GetDatabase("local").GetCollection<BsonDocument>("urls");
+        });
+        
         builder.Services.AddScoped<UrlCollection>();
         builder.Services.AddScoped<Redirect>();
         builder.Services.AddScoped<Shorten>();
