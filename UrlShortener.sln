@@ -12,6 +12,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.UnitTests", "U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{37BF5A7B-1CD9-46BA-B5D3-3C64E7DF4E49}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{91D0C219-7F8A-49E4-A61D-5E9DBE3251E2}"
+	ProjectSection(SolutionItems) = preProject
+		postman\URL Shortener.postman_collection.json = postman\URL Shortener.postman_collection.json
+		postman\Url Shortener - Local.postman_environment.json = postman\Url Shortener - Local.postman_environment.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,0 +1,110 @@
+{
+  "info": {
+    "_postman_id": "36ccd210-2ec8-4ebb-9609-08a7c160cb85",
+    "name": "URL Shortener",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51941844",
+    "_collection_link": "https://go.postman.co/collection/51941844-36ccd210-2ec8-4ebb-9609-08a7c160cb85?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Shorten URL",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              "",
+              "pm.environment.set(\"shortenedUrlToken\", pm.response.json().shortenedUrl);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"Url\": \"{{urlToShorten}}\",\n    \"Length\": 5\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/url/",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "url",
+            ""
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "Redirect From Previously Shortened URL",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/url/{{shortenedUrlToken}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "url",
+            "{{shortenedUrlToken}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Purge URLs",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{apiKey}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"RemoveAfterDays\": {{purgeAfterDays}}\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/purge",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "purge"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

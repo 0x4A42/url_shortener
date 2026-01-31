@@ -15,6 +15,8 @@ This repository is to host a url shortener I created for the purposes of wanting
 
 ## Sample API Requests
 
+A `postman` collection and environment can be found at `postman/`. You can import these and select the `UrlShortener` environment, updating any variables as needed, for testing purposes.
+
 The base URL has been `http://localhost:5002/` during development. Your IDE may change this, so double check if you're running into issues or have a port conflict.
 
 ### Shorten a URL - `{url}/shorten/ (POST)`
@@ -58,6 +60,3 @@ Sample Response
   "detail": "3 URL(s) successfully purged."
 }
 ```
-
-## TODO/Future Improvements
-* Maybe add some Api collections for ease of use/testing
